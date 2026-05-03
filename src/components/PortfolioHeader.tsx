@@ -56,7 +56,7 @@ const PortfolioHeader = ({ activeCategory }: PortfolioHeaderProps) => {
               DAVID SPACE
             </TextRoll>
           ) : (
-            "MORGAN BLAKE"
+            "DAVID SPACE"
           )}
         </Link>
 

@@ -68,8 +68,8 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="Morgan Blake - Fashion Production & Photography"
-        description="Production photographer specializing in fashion, editorial, and commercial photography. Creating compelling imagery for global brands and publications."
+        title="DAVID SPACE - Fashion Production & Web Design"
+        description="Fashion Production & Web Design specialist. Creating compelling imagery and digital experiences."
         canonicalUrl="/"
         ogType="profile"
         jsonLd={jsonLd}

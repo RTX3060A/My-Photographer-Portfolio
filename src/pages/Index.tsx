@@ -43,13 +43,13 @@ const Index = () => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Morgan Blake",
-    "jobTitle": "Production Photographer",
-    "description": "Production photographer specializing in fashion, editorial, and commercial photography. Creating compelling imagery for global brands and publications.",
-    "url": "https://morganblake.com",
-    "image": "https://morganblake.com/og-image.jpg",
+    "name": "DAVID SPACE",
+    "jobTitle": "Fashion Production & Web Design",
+    "description": "Fashion Production & Web Design specialist. Creating compelling imagery and digital experiences.",
+    "url": "https://davidspace.com",
+    "image": "https://davidspace.com/og-image.jpg",
     "sameAs": [
-      "https://instagram.com/morganblake.photo"
+      "https://instagram.com/davidspace"
     ],
     "knowsAbout": [
       "Fashion Photography",
@@ -68,8 +68,8 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="Morgan Blake - Fashion Production & Photography"
-        description="Production photographer specializing in fashion, editorial, and commercial photography. Creating compelling imagery for global brands and publications."
+        title="DAVID SPACE - Fashion Production & Web Design"
+        description="Fashion Production & Web Design specialist. Creating compelling imagery and digital experiences."
         canonicalUrl="/"
         ogType="profile"
         jsonLd={jsonLd}

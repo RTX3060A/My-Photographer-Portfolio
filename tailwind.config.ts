@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        'playfair': ['"IBM Plex Mono"', 'Courier New', 'monospace'],
-        'inter': ['"IBM Plex Mono"', 'Courier New', 'monospace'],
+        'editorial': ['"Libre Baskerville"', 'Georgia', 'serif'],
+        'playfair': ['"Libre Baskerville"', 'Georgia', 'serif'],
+        'inter': ['"IBM Plex Sans"', 'Arial', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

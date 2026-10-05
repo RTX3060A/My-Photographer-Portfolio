@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import PortfolioHeader from "@/components/PortfolioHeader";
+import PhotographerBio from "@/components/PhotographerBio";
 import PortfolioFooter from "@/components/PortfolioFooter";
-import ArchiveExperience from "@/components/ArchiveExperience";
-import ViewingRoom from "@/components/ViewingRoom";
+import MasonryGallery from "@/components/MasonryGallery";
+import Lightbox from "@/components/Lightbox";
 import SEO from "@/components/SEO";
 import { fetchMixedMedia } from "@/services/pexels";
-import { getFallbackArchive } from "@/data/archive";
-import type { ArchiveItem } from "@/types/archive";
 
 const validCategories = ['selected', 'commissioned', 'editorial', 'personal', 'all'];
 
 const CategoryGallery = () => {
   const { category } = useParams<{ category: string }>();
-  const [images, setImages] = useState<ArchiveItem[]>([]);
+  const [images, setImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [page, setPage] = useState(1);
 
   // Validate category
   if (!category || !validCategories.includes(category.toLowerCase())) {
@@ -26,26 +26,23 @@ const CategoryGallery = () => {
 
   const categoryUpper = category.toUpperCase();
 
-  const loadImages = async () => {
+  useEffect(() => {
+    const loadImages = async () => {
       try {
         setLoading(true);
         setError(null);
-        const data = await fetchMixedMedia(categoryUpper, 1, 20);
-        setImages(data.items as ArchiveItem[]);
+        const data = await fetchMixedMedia(categoryUpper, page, 20);
+        setImages(data.items);
       } catch (err) {
         console.error('Error fetching Pexels media:', err);
-        setError('Online archive unavailable. Showing the local collection.');
-        setImages(getFallbackArchive(categoryUpper));
+        setError('Failed to load images. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
 
-  };
-
-  useEffect(() => {
     loadImages();
-  }, [categoryUpper]);
+  }, [categoryUpper, page]);
 
   const handleImageClick = (index: number) => {
     setLightboxIndex(index);
@@ -100,13 +97,31 @@ const CategoryGallery = () => {
       />
 
       <main>
-        {error && <p className="sr-only" role="status">{error}</p>}
-        <ArchiveExperience category={categoryUpper} items={images} loading={loading} onOpen={handleImageClick} onRetry={loadImages} />
+        <PhotographerBio />
+
+        {error && (
+          <div className="text-center py-20">
+            <p className="text-destructive">{error}</p>
+          </div>
+        )}
+
+        {!error && images.length > 0 && (
+          <MasonryGallery
+            images={images}
+            onImageClick={handleImageClick}
+          />
+        )}
+
+        {!loading && !error && images.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-muted-foreground">No images found in this category.</p>
+          </div>
+        )}
       </main>
 
       {lightboxOpen && images.length > 0 && (
-        <ViewingRoom
-          items={images}
+        <Lightbox
+          images={images}
           initialIndex={lightboxIndex}
           onClose={() => setLightboxOpen(false)}
         />

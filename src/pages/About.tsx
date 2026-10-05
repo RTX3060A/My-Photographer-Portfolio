@@ -18,7 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import portraitFallback from "@/assets/raya-portrait.jpg";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, { message: "Name is required" }).max(100, { message: "Name must be less than 100 characters" }),
@@ -29,7 +28,7 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 const About = () => {
-  const [portrait, setPortrait] = useState<{ src: string; alt: string; width?: number; height?: number }>({ src: portraitFallback, alt: "DAVID SPACE studio portrait" });
+  const [portrait, setPortrait] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -84,8 +83,8 @@ const About = () => {
   return (
     <>
       <SEO
-        title="About — DAVID SPACE"
-        description="DAVID SPACE is an image-making and visual production practice working across fashion, editorial, and digital experiences."
+        title="About - Morgan Blake"
+        description="Learn about Morgan Blake, a production photographer specializing in fashion, editorial, and commercial photography."
         canonicalUrl="/about"
       />
 
@@ -93,23 +92,21 @@ const About = () => {
         activeCategory=""
       />
       
-      <main id="main-content" className="min-h-screen">
-        <section className="mx-auto max-w-[1500px] px-4 pb-20 pt-28 md:px-10 md:pt-36">
-          <div className="mb-20 grid gap-12 border-b border-border pb-20 lg:grid-cols-12 lg:gap-16">
-            <div className="space-y-8 lg:col-span-5">
+      <main className="min-h-screen">
+        <section className="max-w-[1600px] mx-auto pt-20 pb-12 md:pt-24 md:pb-16">
+          <div className="text-center space-y-8 mb-16 px-3 md:px-5 max-w-2xl mx-auto">
             <div className="space-y-4">
-              <p className="text-[10px] uppercase tracking-[0.3em] text-accent">Studio profile</p>
-              <h1 className="font-editorial text-5xl italic text-foreground md:text-7xl">
-                DAVID SPACE
+              <h1 className="font-playfair text-4xl md:text-5xl text-foreground">
+                Morgan Blake
               </h1>
               <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-inter">
-                FASHION PRODUCTION & WEB DESIGN
+                PRODUCTION & PHOTOGRAPHY
               </p>
             </div>
 
-            </div>
+            {/* Portrait */}
             {!loading && portrait && (
-              <div className="overflow-hidden lg:col-span-7">
+              <div className="max-w-xs mx-auto border border-foreground/10 overflow-hidden">
                 <picture className="relative block">
                   {portrait.width && portrait.height && (
                     <svg
@@ -128,7 +125,7 @@ const About = () => {
                   <img
                     src={portrait.src}
                     alt={portrait.alt}
-                    className="absolute left-0 top-0 h-full w-full object-cover grayscale"
+                    className="absolute top-0 left-0 w-full h-auto grayscale"
                     style={{
                       opacity: loading ? 0 : 1,
                       transition: 'opacity 0.5s ease-out'
@@ -140,37 +137,41 @@ const About = () => {
           </div>
 
           {/* Bio Section */}
-          <div className="mx-auto mb-20 grid max-w-5xl gap-10 text-sm leading-7 text-foreground/80 md:grid-cols-2">
+          <div className="max-w-2xl mx-auto px-3 md:px-5 space-y-8 text-center text-foreground/80 text-sm leading-relaxed mb-16">
             <p>
-              DAVID SPACE is an independent visual practice working across fashion production, editorial photography, and digital design.
+              Production photographer specializing in fashion, editorial, and commercial photography.
+              Creating compelling imagery with technical precision and creative vision for global brands
+              and publications.
             </p>
 
             <p>
-              Each project is developed as a complete visual system—from research and location work to image sequencing and final digital presentation.
+              Full production services including art buying, location scouting, casting, and on-set
+              management. Collaborative approach ensuring seamless execution from concept to delivery.
             </p>
 
             <div className="pt-8">
-              <h2 className="font-editorial text-xl text-foreground mb-4">Practice</h2>
+              <h2 className="font-playfair text-xl text-foreground mb-4">Services</h2>
               <p className="text-foreground/70 text-xs uppercase tracking-wider leading-loose">
-                Fashion Production / Editorial Photography / Creative Direction / Digital Art Direction / Web Design
+                Fashion & Editorial Photography / Commercial Production / Art Buying & Creative Direction /
+                Location Scouting / Casting & Talent Coordination
               </p>
             </div>
 
             <div className="pt-4">
-              <h2 className="font-editorial text-xl text-foreground mb-4">Archive</h2>
+              <h2 className="font-playfair text-xl text-foreground mb-4">Select Clients</h2>
               <p className="text-foreground/70 text-xs uppercase tracking-wider leading-loose">
-                Selected commissions, editorial stories, independent studies, and location-based visual records.
+                Various fashion brands and editorial publications
               </p>
             </div>
           </div>
 
           {/* Contact Form Section */}
-          <div className="mx-auto max-w-2xl border-t border-border pt-20">
+          <div className="max-w-xl mx-auto px-3 md:px-5 pt-16">
             <div className="text-center space-y-4 mb-12">
               <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-inter">
                 INQUIRIES
               </p>
-              <h2 className="font-editorial text-4xl italic text-foreground md:text-5xl">
+              <h2 className="font-playfair text-4xl md:text-5xl text-foreground">
                 Contact
               </h2>
               <p className="text-foreground/80 text-sm leading-relaxed">

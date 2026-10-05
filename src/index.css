@@ -8,33 +8,33 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 30 6% 6%;
-    --foreground: 43 20% 88%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
 
-    --card: 30 5% 9%;
-    --card-foreground: 43 20% 88%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
 
-    --popover: 30 5% 9%;
-    --popover-foreground: 43 20% 88%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: 43 20% 88%;
-    --primary-foreground: 30 6% 6%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 5% 13%;
-    --secondary-foreground: 43 20% 88%;
+    --secondary: 0 0% 92%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 30 5% 13%;
-    --muted-foreground: 40 3% 41%;
+    --muted: 0 0% 85%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 357 61% 30%;
-    --accent-foreground: 43 20% 88%;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 3% 22%;
-    --input: 40 3% 22%;
-    --ring: 357 61% 30%;
+    --border: 0 0% 88%;
+    --input: 0 0% 85%;
+    --ring: 0 0% 10%;
 
     --radius: 0rem;
 
@@ -50,8 +50,8 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 30 6% 6%;
-    --foreground: 43 20% 88%;
+    --background: 30 15% 12%;
+    --foreground: 227 50% 75%;
 
     --card: 30 15% 15%;
     --card-foreground: 227 50% 75%;
@@ -59,8 +59,8 @@ All colors MUST be HSL.
     --popover: 30 15% 15%;
     --popover-foreground: 227 50% 75%;
 
-    --primary: 43 20% 88%;
-    --primary-foreground: 30 6% 6%;
+    --primary: 227 50% 75%;
+    --primary-foreground: 30 15% 12%;
 
     --secondary: 30 12% 18%;
     --secondary-foreground: 227 50% 75%;
@@ -68,8 +68,8 @@ All colors MUST be HSL.
     --muted: 30 12% 20%;
     --muted-foreground: 227 30% 60%;
 
-    --accent: 357 61% 30%;
-    --accent-foreground: 43 20% 88%;
+    --accent: 227 50% 75%;
+    --accent-foreground: 30 15% 12%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -129,8 +129,6 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-inter;
-    letter-spacing: 0;
-    min-width: 320px;
   }
 
   /* Global focus styles for keyboard navigation */
@@ -142,19 +140,5 @@ All colors MUST be HSL.
   .skip-to-content {
     @apply absolute left-0 top-0 z-[100] -translate-y-full bg-foreground text-background px-6 py-3 text-sm uppercase tracking-widest;
     @apply focus:translate-y-0 transition-transform duration-200;
-  }
-}
-
-@layer utilities {
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }

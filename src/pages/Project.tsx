@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import PortfolioHeader from "@/components/PortfolioHeader";
-import PortfolioFooter from "@/components/PortfolioFooter";
+import { ArrowRight } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 
 import alpine1 from "@/assets/projects/alpine-1.jpg";
@@ -34,8 +34,8 @@ const Project = () => {
     "description": "A collection of images capturing the ethereal quality of early morning light in mountain landscapes. These photographs explore the delicate balance between shadow and illumination in high-altitude environments.",
     "creator": {
       "@type": "Person",
-      "name": "DAVID SPACE",
-      "url": "https://davidspace.com"
+      "name": "Morgan Blake",
+      "url": "https://morganblake.com"
     },
     "about": {
       "@type": "Thing",
@@ -43,11 +43,11 @@ const Project = () => {
     },
     "image": projectImages.map((img) => ({
       "@type": "ImageObject",
-      "contentUrl": `https://davidspace.com${img.src}`,
+      "contentUrl": `https://morganblake.com${img.src}`,
       "caption": img.caption,
       "creator": {
         "@type": "Person",
-        "name": "DAVID SPACE"
+        "name": "Morgan Blake"
       }
     })),
     "datePublished": "2024",
@@ -57,62 +57,59 @@ const Project = () => {
   return (
     <>
       <SEO
-        title="Alpine Light — DAVID SPACE"
+        title="Alpine Light - Morgan Blake"
         description="A collection of images capturing the ethereal quality of early morning light in mountain landscapes. These photographs explore the delicate balance between shadow and illumination in high-altitude environments."
         canonicalUrl={`/project/${slug}`}
         ogType="article"
         jsonLd={jsonLd}
       />
 
-      <PortfolioHeader activeCategory="" />
+      <Header />
 
-      <main id="main-content" className="pt-16">
-        <header className="mx-auto grid max-w-[1500px] gap-10 px-4 py-20 md:px-10 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-          <p className="mb-4 text-[10px] uppercase tracking-[0.3em] text-accent">Photographic essay / 2024</p>
-          <h1 className="font-editorial text-5xl italic md:text-7xl mb-6">
+      <main>
+        <header className="px-8 py-20 max-w-2xl">
+          <h1 className="text-4xl md:text-5xl font-light tracking-tight mb-6">
             Alpine Light
           </h1>
-          </div>
-          <p className="self-end text-base leading-8 text-muted-foreground lg:col-span-5">
+          <p className="text-lg leading-relaxed text-muted-foreground">
             A collection of images capturing the ethereal quality of early morning light in mountain landscapes. 
             These photographs explore the delicate balance between shadow and illumination in high-altitude environments.
           </p>
         </header>
 
-        <div className="mx-auto flex max-w-[1500px] flex-col gap-20 px-4 py-10 animate-fade-in md:px-10 lg:gap-32">
+        <div className="flex flex-col gap-12 md:gap-16 lg:gap-20 py-20 animate-fade-in">
           {projectImages.map((image, index) => (
-            <figure key={index} className={index % 3 === 1 ? "md:ml-auto md:w-4/5" : index % 3 === 2 ? "md:w-3/4" : "w-full"}>
+            <div key={index}>
               <img
                 src={image.src}
                 alt={image.caption}
                 className="w-full h-auto object-cover"
                 loading="lazy"
               />
-              <figcaption className="flex justify-between border-b border-border py-4 text-xs text-muted-foreground">
-                <span>{image.caption}</span><span>{String(index + 1).padStart(2, "0")} / {String(projectImages.length).padStart(2, "0")}</span>
-              </figcaption>
-            </figure>
+              <p className="px-8 py-4 text-sm text-muted-foreground italic">
+                {image.caption}
+              </p>
+            </div>
           ))}
         </div>
 
         <Link
           to="/"
-          className="group mx-auto mt-20 flex max-w-[1500px] items-center justify-between border-t border-border px-4 py-12 transition-colors hover:bg-muted md:px-10"
+          className="flex items-center justify-between px-8 py-12 border-t border-border hover:bg-muted transition-all duration-300 group"
         >
           <div>
             <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
               More Work
             </p>
             <h2 className="text-2xl font-light tracking-tight group-hover:translate-x-2 transition-transform duration-300">
-               Return to Archive
+              View Gallery
             </h2>
           </div>
           <ArrowRight className="w-6 h-6 text-muted-foreground group-hover:translate-x-2 group-hover:text-foreground transition-all duration-300" />
         </Link>
       </main>
 
-      <PortfolioFooter />
+      <Footer />
     </>
   );
 };

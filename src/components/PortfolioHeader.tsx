@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import FocusTrap from "focus-trap-react";
 import { TextRoll } from "@/components/ui/text-roll";
 
@@ -44,11 +43,11 @@ const PortfolioHeader = ({ activeCategory }: PortfolioHeaderProps) => {
   }, [mobileMenuOpen]);
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-[1500px] items-center justify-between gap-6 px-4 md:px-10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background">
+      <div className="max-w-[1600px] mx-auto flex items-center justify-between md:justify-center px-3 md:px-5 py-3 gap-3">
         <Link
           to="/"
-          className="font-editorial text-lg italic text-foreground transition-colors hover:text-accent whitespace-nowrap"
+          className="text-[10px] md:text-[11px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors font-inter whitespace-nowrap"
           onMouseEnter={() => setHoveredItem('name')}
           onMouseLeave={() => setHoveredItem(null)}
         >
@@ -62,26 +61,24 @@ const PortfolioHeader = ({ activeCategory }: PortfolioHeaderProps) => {
         </Link>
 
         {/* Mobile Menu Button */}
-        <Button
-          variant="ghost"
-          size="icon"
+        <button
           onClick={() => setMobileMenuOpen(true)}
-          className="md:hidden"
+          className="md:hidden p-2 text-foreground/70 hover:text-foreground transition-colors"
           aria-label="Open navigation menu"
           aria-expanded={mobileMenuOpen}
         >
           <Menu size={20} />
-        </Button>
+        </button>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-6 md:flex" aria-label="Primary navigation">
+        <div className="hidden md:flex items-center gap-3">
         {categories.map((category) => (
           <Link
             key={category}
             to={`/category/${category.toLowerCase()}`}
             onMouseEnter={() => setHoveredItem(category)}
             onMouseLeave={() => setHoveredItem(null)}
-            className={`text-[10px] uppercase tracking-[0.18em] transition-colors whitespace-nowrap ${
+            className={`text-[10px] md:text-[11px] uppercase tracking-widest font-inter transition-colors whitespace-nowrap ${
               activeCategory === category
                 ? "text-foreground font-medium"
                 : "text-muted-foreground hover:text-foreground/80"
@@ -99,7 +96,7 @@ const PortfolioHeader = ({ activeCategory }: PortfolioHeaderProps) => {
         
         <Link
           to="/about"
-          className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
+          className="text-[10px] md:text-[11px] uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors font-inter whitespace-nowrap"
           onMouseEnter={() => setHoveredItem('about')}
           onMouseLeave={() => setHoveredItem(null)}
         >
@@ -111,7 +108,7 @@ const PortfolioHeader = ({ activeCategory }: PortfolioHeaderProps) => {
             "ABOUT"
           )}
         </Link>
-       </nav>
+      </div>
 
         {/* Mobile Menu Overlay */}
         {mobileMenuOpen && (
@@ -124,14 +121,13 @@ const PortfolioHeader = ({ activeCategory }: PortfolioHeaderProps) => {
             >
               {/* Close Button */}
               <div className="flex justify-end p-5">
-                <Button
-                  variant="ghost"
-                  size="icon"
+                <button
                   onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 text-foreground/70 hover:text-foreground transition-colors"
                   aria-label="Close navigation menu"
                 >
                   <X size={24} />
-                </Button>
+                </button>
               </div>
 
               {/* Mobile Navigation Links */}

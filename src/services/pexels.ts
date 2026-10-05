@@ -153,21 +153,14 @@ export const fetchMixedMedia = async (
 
   // Transform videos
   const videos = videosData.videos.map((video: PexelsVideo) => ({
-    id: `pexels-video-${video.id}`,
     type: 'video' as const,
     src: video.image, // Thumbnail for gallery
     videoSrc: video.video_files.find(f => f.quality === 'hd')?.link || video.video_files[0].link,
     highResSrc: video.image, // Use same thumbnail for lightbox
     alt: `Video by ${video.user.name}`,
-    title: `Motion Study by ${video.user.name}`,
-    series: 'DAVID SPACE Archive',
-    year: 'Date not provided',
     photographer: video.user.name,
     client: 'Pexels',
-    location: 'Location not provided',
-    medium: 'Digital video',
-    dimensions: `${video.width} × ${video.height} px`,
-    copyright: `Video courtesy of ${video.user.name} / Pexels`,
+    location: '',
     details: `Video by ${video.user.name} on Pexels`,
     category: 'PEXELS',
     width: video.width,
@@ -201,19 +194,12 @@ export const fetchMixedMedia = async (
 
 export const transformPexelsToGalleryImage = (photo: PexelsPhoto) => {
   return {
-    id: `pexels-${photo.id}`,
     src: photo.src.large, // Gallery thumbnail (~940px) - fast loading
     highResSrc: photo.src.large2x, // Lightbox display (~1880px) - 2x retina resolution
     alt: photo.alt || 'Fashion photography',
-    title: photo.alt || 'Untitled study',
-    series: 'DAVID SPACE Archive',
-    year: 'Date not provided',
     photographer: photo.photographer,
     client: 'Pexels',
-    location: 'Location not provided',
-    medium: 'Digital photograph',
-    dimensions: `${photo.width} × ${photo.height} px`,
-    copyright: `Image courtesy of ${photo.photographer} / Pexels`,
+    location: '',
     details: `Photo by ${photo.photographer} on Pexels`,
     category: 'PEXELS',
     width: photo.width, // Intrinsic width for aspect ratio

@@ -1,41 +1,37 @@
 import { useState, useEffect } from "react";
 import PortfolioHeader from "@/components/PortfolioHeader";
+import PhotographerBio from "@/components/PhotographerBio";
 import PortfolioFooter from "@/components/PortfolioFooter";
-import ArchiveExperience from "@/components/ArchiveExperience";
-import ViewingRoom from "@/components/ViewingRoom";
+import MasonryGallery from "@/components/MasonryGallery";
+import Lightbox from "@/components/Lightbox";
 import SEO from "@/components/SEO";
 import { fetchMixedMedia } from "@/services/pexels";
-import { getFallbackArchive } from "@/data/archive";
-import type { ArchiveItem } from "@/types/archive";
 
 const Index = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [displayImages, setDisplayImages] = useState<ArchiveItem[]>([]);
+  const [displayImages, setDisplayImages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   // Homepage always shows SELECTED category
   const activeCategory = "SELECTED";
 
-  const loadImages = async () => {
+  useEffect(() => {
+    const loadImages = async () => {
       try {
         setLoading(true);
         setError(null);
         const data = await fetchMixedMedia(activeCategory, 1, 20);
-        setDisplayImages(data.items as ArchiveItem[]);
+        setDisplayImages(data.items);
       } catch (err) {
         console.error('Error fetching Pexels media:', err);
-        setError('Online archive unavailable. Showing the local collection.');
-        setDisplayImages(getFallbackArchive(activeCategory));
+        setError('Failed to load images. Please try again later.');
       } finally {
         setLoading(false);
       }
     };
 
-  };
-
-  useEffect(() => {
     loadImages();
   }, []); // Remove activeCategory dependency - it's now constant
 
@@ -84,13 +80,31 @@ const Index = () => {
       />
       
       <main>
-        {error && <p className="sr-only" role="status">{error}</p>}
-        <ArchiveExperience category={activeCategory} items={displayImages} loading={loading} onOpen={handleImageClick} onRetry={loadImages} />
+        <PhotographerBio />
+
+        {error && (
+          <div className="text-center py-20">
+            <p className="text-destructive">{error}</p>
+          </div>
+        )}
+
+        {!error && displayImages.length > 0 && (
+          <MasonryGallery
+            images={displayImages}
+            onImageClick={handleImageClick}
+          />
+        )}
+
+        {!loading && !error && displayImages.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-muted-foreground">No images found in this category.</p>
+          </div>
+        )}
       </main>
 
       {lightboxOpen && displayImages.length > 0 && (
-        <ViewingRoom
-          items={displayImages}
+        <Lightbox
+          images={displayImages}
           initialIndex={lightboxIndex}
           onClose={() => setLightboxOpen(false)}
         />

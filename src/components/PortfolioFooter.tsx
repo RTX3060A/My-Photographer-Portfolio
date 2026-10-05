@@ -1,29 +1,9 @@
 const PortfolioFooter = () => {
   return (
-    <footer className="max-w-[1600px] mx-auto px-3 md:px-5 pb-16">
-      <div className="text-center text-[10px] uppercase tracking-widest font-inter text-muted-foreground">
-        <a
-          href=""
-          className="hover:text-foreground transition-colors"
-        >
-          ​
-        </a>
-        <span className="mx-2">​</span>
-        <a
-          href=""
-          className="hover:text-foreground transition-colors"
-        >
-          ​
-        </a>
-        <span className="mx-2">​</span>
-        <a
-          href=""
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-foreground transition-colors"
-        >
-          DAVID SPACE
-        </a>
+    <footer className="mx-auto max-w-[1500px] border-t border-border px-4 py-12 md:px-10">
+      <div className="flex flex-col gap-5 text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <p>© {new Date().getFullYear()} DAVID SPACE</p>
+        <p>Photography archive · All rights reserved</p>
       </div>
     </footer>
   );
